@@ -105,7 +105,7 @@ class _LoginForm extends StatelessWidget {
               height: 30,
             ),
             MaterialButton(
-              // minWidth: 300,
+              minWidth: 300,
               onPressed: () async {
                 // if (_formKey.currentState!.validate()) {
                 //   final respuesta = await db.getUsuario(

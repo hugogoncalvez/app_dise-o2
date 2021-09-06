@@ -126,7 +126,7 @@ class _FloatingActionButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       backgroundColor: Color(0xffFF6339),
-      onPressed: () => Navigator.pushReplacementNamed(context, 'register'),
+      onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
     );
   }
 }
