@@ -27,9 +27,10 @@ class AuthBackground extends StatelessWidget {
             painter: RPSCustomPainter2(),
           ),
           Positioned(
-            top: 0,
+            top: -size.height * 0.06,
+            right: -size.height * 0.10,
             child: Image(
-              image: AssetImage('assets/comidas.png'),
+              image: AssetImage('assets/plato.png'),
               // fit: BoxFit.fitHeight,
             ),
           ),
@@ -38,8 +39,8 @@ class AuthBackground extends StatelessWidget {
               right: -size.height * 0.039,
               child: Circulo(radio: 30, colore: colorCirculo)),
           Positioned(
-              bottom: size.height * 0.18,
-              right: size.height * 0.2,
+              top: size.height * 0.1,
+              left: size.height * 0.1,
               child: Circulo(radio: 12, colore: colorCirculo)),
           Positioned(
               bottom: size.height * 0.03,
@@ -58,7 +59,7 @@ class AuthBackground extends StatelessWidget {
                 turns: -19),
           ),
           Positioned(
-              bottom: size.height * 0.04,
+              bottom: size.height * 0.05,
               right: size.height * 0.27,
               child: Rotation(
                   blurRadius: 15,
@@ -69,7 +70,7 @@ class AuthBackground extends StatelessWidget {
                   spreadradius: 3,
                   turns: 120)),
           Positioned(
-              top: size.height * 0.5,
+              top: size.height * 0.45,
               left: -size.height * 0.019,
               child: Rotation(
                   blurRadius: 15,
@@ -79,12 +80,20 @@ class AuthBackground extends StatelessWidget {
                   size: size.height * 0.07,
                   spreadradius: 3,
                   turns: 120)),
-
-          
+          Positioned(
+              bottom: size.height * 0.15,
+              right: size.height * 0.019,
+              child: Rotation(
+                  blurRadius: 15,
+                  dx: 5,
+                  dy: 8,
+                  image: 'assets/burger.png',
+                  size: size.height * 0.07,
+                  spreadradius: 3,
+                  turns: 0)),
           this.child,
         ],
       ),
     );
   }
 }
-

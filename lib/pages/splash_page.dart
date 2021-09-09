@@ -3,32 +3,34 @@ import 'package:app_diseno2/widget/rotation.dart';
 import 'package:app_diseno2/widget/slide.dart';
 import 'package:flutter/material.dart';
 
-class SlidePage extends StatelessWidget {
+class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final Color colorCirculo = Color(0xff7F93DF);
-    final Color colorCirculo2 = Color(0xff3A50B1);
+    final Color colorCirculo2 = Color(0xff3A40B1);
     return Scaffold(
         floatingActionButton: _FloatingActionButton(),
-        backgroundColor: Color(0xff425CCE),
+        backgroundColor: Color(0xff3654D0),
         body: SafeArea(
-          child: Container(
-            width: double.infinity,
-            child: Stack(
+          child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+            final width = constraints.biggest.width;
+            final height = constraints.biggest.height;
+            return Stack(
               alignment: Alignment.center,
               children: [
                 CustomPaint(
-                  size: Size(size.width, size.height),
+                  size: Size(width, height),
                   painter: RPSCustomPainter(),
                 ),
                 CustomPaint(
-                  size: Size(size.width, size.height),
+                  size: Size(width, height),
                   painter: RPSCustomPainter2(),
                 ),
                 Positioned(
-                  top: -size.height * 0.05,
-                  right: -size.width * 0.35,
+                  top: -height * 0.08,
+                  right: -height * 0.11,
                   child: _Imagen(
                     imagen: 'assets/plato.png',
                     spreadRadius: 5,
@@ -36,22 +38,22 @@ class SlidePage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: size.height * 0.38,
-                    right: size.height * 0.124,
+                    top: height * 0.38,
+                    right: (width <= 410) ? height * 0.216 : height * 0.115,
                     child: Circulo(radio: 9, colore: colorCirculo)),
                 Positioned(
-                    top: size.height * 0.45,
-                    left: -size.height * 0.02,
+                    top: height * 0.45,
+                    left: -width * 0.035,
                     child: Circulo(radio: 16, colore: colorCirculo)),
                 Positioned(
-                    bottom: size.height * 0.3,
-                    right: -size.height * 0.008,
+                    bottom: height * 0.28,
+                    right: -width * 0.015,
                     child: Circulo(radio: 10, colore: colorCirculo2)),
                 Positioned(
-                  top: size.height * 0.25,
-                  right: size.height * 0.25,
+                  top: height * 0.27,
+                  right: width * 0.5,
                   child: Rotation(
-                      size: size.height * 0.05,
+                      size: (width <= 410) ? height * 0.05 : height * 0.08,
                       blurRadius: 15,
                       dx: 5,
                       dy: 8,
@@ -60,35 +62,35 @@ class SlidePage extends StatelessWidget {
                       image: 'assets/albahaca.png'),
                 ),
                 Positioned(
-                    top: size.height * 0.04,
-                    right: size.height * 0.27,
+                    top: height * 0.04,
+                    right: width * 0.55,
                     child: Rotation(
                         blurRadius: 15,
                         dx: 5,
                         dy: 8,
                         image: 'assets/albahaca.png',
-                        size: size.height * 0.04,
+                        size: (width <= 410) ? height * 0.04 : height * 0.06,
                         spreadradius: 3,
                         turns: 40)),
                 Positioned(
-                  top: size.height * 0.12,
-                  left: -size.height * 0.005,
+                  top: height * 0.12,
+                  left: -height * 0.03,
                   child: Rotation(
                       blurRadius: 15,
                       dx: 5,
                       dy: 8,
                       image: 'assets/mora.png',
-                      size: size.height * 0.065,
+                      size: (width <= 410) ? height * 0.065 : height * 0.15,
                       spreadradius: 3,
                       turns: -19),
                 ),
                 Positioned(
-                    bottom: size.height * 0.25,
-                    left: size.height * 0.04,
+                    bottom: height * 0.25,
+                    left: height * 0.04,
                     child: _Texto(size: size))
               ],
-            ),
-          ),
+            );
+          }),
         ));
   }
 }
@@ -100,34 +102,41 @@ class _FloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return FloatingActionButton(
-      child: Container(
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            Positioned(
-              left: size.height * 0.01,
-              child: Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.white30,
-                size: 30,
-              ),
-            ),
-            Positioned(
-                left: size.height * 0.025,
+    //  final size = MediaQuery.of(context).size;
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      final width = constraints.biggest.width;
+      final height = constraints.biggest.height;
+      print(width);
+
+      return FloatingActionButton(
+        child: Container(
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              Positioned(
+                left: (width <= 410) ? height * 0.01 : height * 0.010,
                 child: Icon(
                   Icons.arrow_forward_ios,
+                  color: Colors.white30,
                   size: 30,
-                ))
-          ],
+                ),
+              ),
+              Positioned(
+                  left: (width <= 410) ? height * 0.025 : height * 0.023,
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 30,
+                  ))
+            ],
+          ),
         ),
-      ),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      backgroundColor: Color(0xffFF6339),
-      onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
-    );
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        backgroundColor: Color(0xffFF6339),
+        onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
+      );
+    });
   }
 }
 
@@ -196,7 +205,7 @@ class _Imagen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RotationTransition(
-      turns: rotacion ?? AlwaysStoppedAnimation(0 / 360),
+      turns: rotacion ?? AlwaysStoppedAnimation(0 / 410),
       child: Container(
           decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
             BoxShadow(

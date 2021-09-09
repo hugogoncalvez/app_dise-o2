@@ -1,7 +1,9 @@
+import 'package:app_diseno2/pages/categorias_page.dart';
+import 'package:flutter/material.dart';
+import 'package:app_diseno2/pages/home_page.dart';
 import 'package:app_diseno2/pages/login_screens.dart';
 import 'package:app_diseno2/pages/register_screens.dart';
-import 'package:app_diseno2/pages/slide_page.dart';
-import 'package:flutter/material.dart';
+import 'package:app_diseno2/pages/splash_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,9 +13,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Curso Diseño',
       initialRoute: 'inicio',
-      routes: {'inicio': (_) => SlidePage(),
-      'login': (_)=> LoginScreen(),
-      'register': (_)=> RegisterPage(),},
+      routes: {
+        'inicio': (_) => SplashPage(),
+        'login': (_) => LoginScreen(),
+        'register': (_) => RegisterPage(),
+        'home': (_) => HomePage(),
+        'categoria': (_) => CotegoriaPage()
+      },
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,30 +1,34 @@
-import 'package:app_diseno2/widget/auth_background.dart';
-import 'package:app_diseno2/widget/card_container.dart';
-import 'package:app_diseno2/widget/input_decorations.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:app_diseno2/widget/auth_background.dart';
+import 'package:app_diseno2/widget/card_container.dart';
+import 'package:app_diseno2/widget/textForms.dart';
 
 class LoginScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xff425CCE),
+      backgroundColor: Color(0xff3654D0),
       body: AuthBackground(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 200),
+              SizedBox(height: size.height * 0.28),
               CardContainer(
                 child: Column(
                   children: [
-                    SizedBox(height: 10),
+                    SizedBox(height: size.height * 0.014),
                     Text('Bienvenido',
                         style: Theme.of(context).textTheme.headline4),
-                    _LoginForm(),
+                    Container(
+                      child: _Formulario(formKey: _formKey),
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: size.height * 0.07),
               TextButton(
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, 'register'),
@@ -41,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     shape: MaterialStateProperty.all(StadiumBorder())),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: size.height * 0.07),
             ],
           ),
         ),
@@ -50,84 +54,29 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginForm extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+class _Formulario extends StatelessWidget {
+  const _Formulario({
+    Key? key,
+    required GlobalKey<FormState> formKey,
+  })  : _formKey = formKey,
+        super(key: key);
+
+  final GlobalKey<FormState> _formKey;
+
   @override
   Widget build(BuildContext context) {
-    // final db = new DataBase();
-    // final preferencias = PreferenciasUsuario();
-    final _usuarioController = new TextEditingController();
-    final _passController = new TextEditingController();
-
-    return Container(
-      child: Form(
-        //mantener referencia al key
+    return Form(
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
-            TextFormField(
-              // se estable en value todo lo que tenga el email y se lo pasa al provider
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecorations.loginInputDecoration(
-                labelText: 'Correo electrónico',
-                prefixIcon: Icons.alternate_email,
-              ),
-              validator: (value) {
-                String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                RegExp regExp = new RegExp(pattern);
-                return regExp.hasMatch(value ?? '')
-                    ? null
-                    : 'Ingrese una derección de correo válida';
-              },
-              controller: _usuarioController,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            TextFormField(
-              // se estable en value todo lo que tenga el pass y se lo pasa al provider
-              obscureText: true,
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecorations.loginInputDecoration(
-                  labelText: 'Contraseña', prefixIcon: Icons.lock),
-              validator: (value) {
-                return (value != null && value.length >= 6)
-                    ? null
-                    : 'La contraseña debe tener más de 6 caracteres';
-              },
-              controller: _passController,
-            ),
-            SizedBox(
-              height: 30,
-            ),
+            TextformCorreo(),
+            TextformPass(),
+            SizedBox(height: 40),
             MaterialButton(
               minWidth: 300,
-              onPressed: () async {
-                // if (_formKey.currentState!.validate()) {
-                //   final respuesta = await db.getUsuario(
-                //       usuario: _usuarioController.text,
-                //       password: _passController.text);
-
-                //   preferencias.setNombreUsuario = _usuarioController.text;
-
-                //   if (respuesta.isEmpty) {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       SnackBar(
-                //         content: Text(
-                //             'El usuario y/o la contraseña son erróneos',
-                //             textAlign: TextAlign.center),
-                //         duration: Duration(seconds: 3),
-                //       ),
-                //     );
-                //     FocusScope.of(context).requestFocus(new FocusNode());
-                //   } else {
-                //     Navigator.pushReplacementNamed(context, 'home');
-                //   }
-                // }
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'home');
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -142,8 +91,6 @@ class _LoginForm extends StatelessWidget {
               ),
             )
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

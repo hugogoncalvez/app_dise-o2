@@ -1,32 +1,37 @@
 import 'package:app_diseno2/widget/auth_background.dart';
 import 'package:app_diseno2/widget/card_container.dart';
 import 'package:app_diseno2/widget/input_decorations.dart';
+import 'package:app_diseno2/widget/textForms.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
 class RegisterPage extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xff425CCE),
+      backgroundColor: Color(0xff3654D0),
       body: AuthBackground(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 200),
+              SizedBox(height: size.height * 0.28),
               CardContainer(
                 child: Column(
                   children: [
-                    SizedBox(height: 10),
+                    SizedBox(height: size.height * 0.014),
                     Text(
                       'Registro',
                       style: Theme.of(context).textTheme.headline4,
                     ),
-                    _LoginForm(),
+                    Container(
+                      child: _Formulario(formKey: _formKey),
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: size.height * 0.07),
               TextButton(
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, 'login'),
@@ -43,12 +48,52 @@ class RegisterPage extends StatelessWidget {
                     ),
                     shape: MaterialStateProperty.all(StadiumBorder())),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: size.height * 0.07),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _Formulario extends StatelessWidget {
+  const _Formulario({
+    Key? key,
+    required GlobalKey<FormState> formKey,
+  })  : _formKey = formKey,
+        super(key: key);
+
+  final GlobalKey<FormState> _formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+        key: _formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(
+          children: [
+            TextformUsuario(),
+            TextformCorreo(),
+            TextformPass(),
+            SizedBox(height: 10),
+            MaterialButton(
+              minWidth: 300,
+              onPressed: () {},
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              color: Color(0xffFF6339),
+              child: Container(
+                child: Text(
+                  'Registrarse',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              ),
+            )
+          ],
+        ));
   }
 }
 

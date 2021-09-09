@@ -54,7 +54,7 @@ class RPSCustomPainter2 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint_0 = new Paint()
-      ..color = Color(0xff364FAD)
+      ..color = Color(0xff3A40B1)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
