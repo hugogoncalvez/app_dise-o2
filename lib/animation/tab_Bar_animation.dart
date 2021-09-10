@@ -2,7 +2,6 @@ import 'package:app_diseno2/animation/itemCategoria_animado.dart';
 import 'package:flutter/material.dart';
 
 class TabControllerAnimado extends StatefulWidget {
-
   @override
   _TabControllerAnimadoState createState() => _TabControllerAnimadoState();
 }
@@ -73,7 +72,8 @@ class _TabControllerState extends State<_TabController> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final stiloTabBar = TextStyle(color: Colors.black, fontSize: 19);
+    final stiloTabBar =
+        TextStyle(color: Colors.black, fontSize: size.height * 0.020);
     return Column(
       children: [
         TabBar(
@@ -169,5 +169,3 @@ class ItemsCategoriaSelecionada extends StatelessWidget {
         });
   }
 }
-
-

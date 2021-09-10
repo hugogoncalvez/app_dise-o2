@@ -1,5 +1,6 @@
-import 'package:app_diseno2/pages/categorias_page.dart';
+import 'package:app_diseno2/pages/carrito.dart';
 import 'package:flutter/material.dart';
+import 'package:app_diseno2/pages/categorias_page.dart';
 import 'package:app_diseno2/pages/home_page.dart';
 import 'package:app_diseno2/pages/login_screens.dart';
 import 'package:app_diseno2/pages/register_screens.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         'login': (_) => LoginScreen(),
         'register': (_) => RegisterPage(),
         'home': (_) => HomePage(),
-        'categoria': (_) => CotegoriaPage()
+        'categoria': (_) => CotegoriaPage(),
+        'carrito': (_)  => CarritoPage()
       },
       debugShowCheckedModeBanner: false,
     );

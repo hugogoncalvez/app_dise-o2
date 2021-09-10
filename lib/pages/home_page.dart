@@ -14,6 +14,15 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color color = Color(0xffF5F5F8);
     final size = MediaQuery.of(context).size;
+    final Map<String, IconData> categoriaSelector = {
+                  "Todas": Icons.restaurant_menu,
+                  "Pizzas": Icons.local_pizza,
+                  "Haburguesas": Icons.lunch_dining,
+                  "China": Icons.ramen_dining,
+                  "Postres": Icons.icecream,
+                  "Cafes": Icons.coffee,
+                  "Otros": Icons.more_horiz
+                };
 
     return Scaffold(
         drawer: Drawer(elevation: 0),
@@ -47,15 +56,7 @@ class HomePage extends StatelessWidget {
               height: 60,
               color: Color(0xffF5F5F5),
               child: CategorySelectionWidget(
-                categorias: {
-                  "Todas": Icons.restaurant_menu,
-                  "Pizzas": Icons.local_pizza,
-                  "Haburguesas": Icons.lunch_dining,
-                  "China": Icons.ramen_dining,
-                  "Postres": Icons.icecream,
-                  "Cafes": Icons.coffee,
-                  "Otros": Icons.more_horiz,
-                },
+                categorias: categoriaSelector,
                 onValueChanged: (newCategory) => categoria = newCategory,
               ),
             ),

@@ -93,6 +93,7 @@ class ItemCategoria extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
       child: Container(
@@ -135,6 +136,7 @@ class ItemCategoria extends StatelessWidget {
                     '${ingredientes.join(' ')}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
+                    style: TextStyle(fontSize: size.height * 0.015),
                   ),
                 ),
                 Text(
@@ -160,7 +162,7 @@ class ItemCategoria extends StatelessWidget {
                         color: Color(0xff3654d0)),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'inicio');
+                          Navigator.pushNamed(context, 'carrito');
                         },
                         icon: Icon(
                           Icons.add,

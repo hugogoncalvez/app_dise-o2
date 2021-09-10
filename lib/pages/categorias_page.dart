@@ -62,7 +62,7 @@ class _BodyContainer extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25), color: Colors.white),
         width: size.width,
-        height: size.height * 0.7,
+        height: size.height * 0.72,
         child: Column(
           children: [
             CategoriaAnimado(categoria: categoria),

@@ -23,14 +23,7 @@ class _CuadradoAnimadoState extends State<CategoriaAnimado>
     opacidad = Tween(begin: 0.0, end: 1.0)
         .animate(CurvedAnimation(parent: controller, curve: Curves.easeInOut));
 
-    // controller.addListener(() {
-
-    //   if (controller.status == AnimationStatus.completed) {
-    //      controller.reset();
-    //   }
-    // });
-
-    super.initState();
+        super.initState();
   }
 
   @override

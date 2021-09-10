@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Rotation extends StatelessWidget {
   const Rotation({
     Key? key,
@@ -30,13 +29,12 @@ class Rotation extends StatelessWidget {
           decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
             BoxShadow(
                 color: Colors.black12.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 15,
-                offset: Offset(5, 8) // changes position of shadow
+                spreadRadius: spreadradius,
+                blurRadius: blurRadius,
+                offset: Offset(dx, dy) // changes position of shadow
                 )
           ]),
           child: Image(image: AssetImage(image))),
     );
   }
 }
-
