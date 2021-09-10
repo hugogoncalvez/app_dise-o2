@@ -57,7 +57,33 @@ class CarritoPage extends StatelessWidget {
                                 ? size.height * 0.03
                                 : size.height * 0.05,
                             spreadradius: 3,
-                            turns: 150 )),
+                            turns: 150)),
+                    Positioned(
+                        bottom: 2, //size.height * 0.04,
+                        left: size.height * 0.20, // size.height * 0.55,
+                        child: Rotation(
+                            blurRadius: 20,
+                            dx: 5,
+                            dy: 8,
+                            image: 'assets/albahaca.png',
+                            size: (size.width <= 410)
+                                ? size.height * 0.055
+                                : size.height * 0.05,
+                            spreadradius: 3,
+                            turns: -30)),
+                    Positioned(
+                        bottom: 6, //size.height * 0.04,
+                        left: size.height * 0.12, // size.height * 0.55,
+                        child: Rotation(
+                            blurRadius: 20,
+                            dx: 5,
+                            dy: 8,
+                            image: 'assets/albahaca.png',
+                            size: (size.width <= 410)
+                                ? size.height * 0.035
+                                : size.height * 0.05,
+                            spreadradius: 3,
+                            turns: 40)),
                     Positioned(
                       top: 5,
                       right: size.height * 0.025,
@@ -70,10 +96,14 @@ class CarritoPage extends StatelessWidget {
                         opacidad: 0.0001,
                       ),
                     ),
+                    Positioned(
+                        left: size.height * 0.07,
+                        top: size.height * 0.065,
+                        child: Text('Sweety bar')),
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ));
   }
