@@ -29,8 +29,8 @@ class SplashPage extends StatelessWidget {
                 painter: RPSCustomPainter2(),
               ),
               Positioned(
-                top: -height * 0.08,
-                right: -height * 0.11,
+                top: (width <= 410) ? -height * 0.11 : -height * 0.08,
+                right: (width <= 410) ? -height * 0.11 : -height * 0.09,
                 child: Imagen(
                   imagen: 'assets/plato.png',
                   spreadRadius: 5,
@@ -40,7 +40,7 @@ class SplashPage extends StatelessWidget {
               ),
               Positioned(
                   top: height * 0.38,
-                  right: (width <= 410) ? height * 0.216 : height * 0.115,
+                  right: (width <= 410) ? height * 0.11 : height * 0.11,
                   child: Circulo(radio: 9, colore: colorCirculo)),
               Positioned(
                   top: height * 0.45,
@@ -79,10 +79,10 @@ class SplashPage extends StatelessWidget {
                 child: Rotation(
                     blurRadius: 15,
                     dx: 5,
-                    dy: 8,
+                    dy: 10,
                     image: 'assets/mora.png',
                     size: (width <= 410) ? height * 0.065 : height * 0.15,
-                    spreadradius: 3,
+                    spreadradius: -10,
                     turns: -19),
               ),
               Positioned(
@@ -96,9 +96,7 @@ class SplashPage extends StatelessWidget {
 }
 
 class _FloatingActionButton extends StatelessWidget {
-  const _FloatingActionButton({
-    Key? key,
-  }) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {

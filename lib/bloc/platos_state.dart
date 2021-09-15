@@ -4,9 +4,10 @@ part of 'platos_bloc.dart';
 class PlatosState {
   final bool isWorking;
   final PlatoModel plato;
-  final List<PlatoModel> lstPlatos;
-  final List<PlatoModel> lstCategorias;
-  final List<PlatoModel> lstPlatosSCategorias;
+  final List<PlatoModel> lstPlatos;  
+  final List<CategoriaModel> lstCategorias;
+  final CategoriaModel categoriaSeleccionada;
+   List<PlatoModel> lstPlatosSCategorias;
   final String accion;
 
   PlatosState({
@@ -15,9 +16,12 @@ class PlatosState {
     plato,
     lstPlatos,
     lstCategorias,
+    categoriaSeleccionada,
     lstPlatosSCategorias,
   })  : this.plato = plato ?? new PlatoModel(),
         this.lstPlatosSCategorias = lstPlatosSCategorias ?? [],
+        this.categoriaSeleccionada =
+            categoriaSeleccionada ?? new CategoriaModel(),
         this.lstPlatos = lstPlatos ?? [],
         this.lstCategorias = lstCategorias ?? [];
 
@@ -25,18 +29,21 @@ class PlatosState {
     bool? isWorking,
     PlatoModel? plato,
     List<PlatoModel>? lstPlatos,
-    List<PlatoModel>? lstCategorias,
+    List<CategoriaModel>? lstCategorias,
+    CategoriaModel? categoriaSeleccionada,
     List<PlatoModel>? lstPlatosSCategorias,
     String? accion,
   }) =>
       PlatosState(
-        isWorking: isWorking ?? this.isWorking,
-        plato: plato ?? this.plato,
-        lstPlatos: lstPlatos ?? this.lstPlatos,
-        lstCategorias: lstCategorias ?? this.lstCategorias,
-        lstPlatosSCategorias: lstPlatosSCategorias ?? this.lstPlatosSCategorias,
-        accion: accion ?? this.accion
-      );
+          isWorking: isWorking ?? this.isWorking,
+          plato: plato ?? this.plato,
+          lstPlatos: lstPlatos ?? this.lstPlatos,
+          lstCategorias: lstCategorias ?? this.lstCategorias,
+          categoriaSeleccionada:
+              categoriaSeleccionada ?? this.categoriaSeleccionada,
+          lstPlatosSCategorias:
+              lstPlatosSCategorias ?? this.lstPlatosSCategorias,
+          accion: accion ?? this.accion);
 
   PlatosState initState() => new PlatosState();
 }

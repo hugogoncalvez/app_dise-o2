@@ -1,32 +1,40 @@
 import 'package:app_diseno2/animation/categoria_animado.dart';
-import 'package:app_diseno2/animation/subtipoHsPrecio_Animado.dart';
-import 'package:app_diseno2/animation/tab_Bar_animation.dart';
+import 'package:app_diseno2/animation/categoriaSubtipoHsPrecio_Animado.dart';
+import 'package:app_diseno2/animation/categoriaTab_Bar_animation.dart';
+import 'package:app_diseno2/bloc/platos_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CotegoriaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final String imagen = ModalRoute.of(context)!.settings.arguments as String;
+
     return DefaultTabController(
       length: 3,
       initialIndex: 0,
-      child: Scaffold(
-        body: Stack(children: [
-          _HeroImagen(imagen: imagen, size: size),
-          _AppBar(
-            size: size,
-          ),
-          _BodyContainer(
-            size: size,
-            hsFin: '22:00',
-            hsInicio: '10.00',
-            origen1: 'American',
-            origen2: 'Italian',
-            precioMin: '20',
-            categoria: 'Sweety bar',
-          ),
-        ]),
+      child: BlocBuilder<PlatosBloc, PlatosState>(
+        builder: (_, state) {
+          
+          return Scaffold(
+              body: Stack(children: [
+            _HeroImagen(
+                imagen: state.categoriaSeleccionada.imagenCategoria as String,
+                size: size),
+            _AppBar(
+              size: size,
+            ),
+            _BodyContainer(
+              size: size,
+              hsFin: state.categoriaSeleccionada.horaFin!,
+              hsInicio: state.categoriaSeleccionada.horaInicio!,
+              origen1: state.categoriaSeleccionada.paisOrigen1!,
+              origen2: state.categoriaSeleccionada.paisOrigen2!,
+              compraMin: state.categoriaSeleccionada.compraMin!,
+              categoria: state.categoriaSeleccionada.categoria!,
+            )
+          ]));
+        },
       ),
     );
   }
@@ -37,7 +45,7 @@ class _BodyContainer extends StatelessWidget {
     Key? key,
     required this.size,
     required this.categoria,
-    required this.precioMin,
+    required this.compraMin,
     required this.origen1,
     required this.origen2,
     required this.hsInicio,
@@ -46,7 +54,7 @@ class _BodyContainer extends StatelessWidget {
 
   final Size size;
   final String categoria;
-  final String precioMin;
+  final String compraMin;
   final String origen1;
   final String origen2;
   final String hsInicio;
@@ -71,8 +79,10 @@ class _BodyContainer extends StatelessWidget {
                 hsInicio: hsInicio,
                 origen1: origen1,
                 origen2: origen2,
-                precioMin: precioMin),
-            TabControllerAnimado(),           
+                compraMin: compraMin),
+            TabControllerAnimado(
+              categoria: categoria,
+            ),
           ],
         ),
       ),

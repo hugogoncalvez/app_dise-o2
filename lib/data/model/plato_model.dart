@@ -14,57 +14,59 @@ class PlatoModel {
     this.id,
     this.nombre,
     this.descripcion,
-    this.categorias,
-    this.subCategoria1,
-    this.subCategoria2,
+    this.categoria,
     this.tamanio,
     this.peso,
-    this.imagen,
+    this.imagenPlato,
     this.imagenDispositivo,
     this.estado,
     this.fechaHora,
+    this.precio,
   });
 
   final String? id;
   final String? nombre;
   final String? descripcion;
-  final String? categorias;
-  final String? subCategoria1;
-  final String? subCategoria2;
+  final String? categoria;
   final String? tamanio;
   final String? peso;
-  final String? imagen;
+  final String? precio;
+
+  final String? imagenPlato;
   final String? imagenDispositivo;
   final String? estado;
   final String? fechaHora;
 
   factory PlatoModel.fromJson(Map<String, dynamic> json) => PlatoModel(
-        id: json["id"] ?? '',
-        nombre: json["nombre"] ?? '',
-        descripcion: json["descripcion"] ?? '',
-        categorias: json["categoris"] ?? '',
-        subCategoria1: json["subCategoria1"] ?? '',
-        subCategoria2: json["subCategoria2"] ?? '',
-        tamanio: json["tamanio"] ?? '',
-        peso: json["peso"] ?? '',
-        imagen: json["imagen"] ?? '',
-        imagenDispositivo: json["imagenDispositivo"] ?? '',
-        estado: json["estado"] ?? '',
-        fechaHora: json["fechaHora"] ?? '',
+      id: json["id"] ?? '',
+      nombre: json["nombre"] ?? '',
+      descripcion: json["descripcion"] ?? '',
+      categoria: json["categoris"] ?? '',
+      
+      tamanio: json["tamanio"] ?? '',
+      peso: json["peso"] ?? '',
+      precio: json["precio"] ?? '',
+      
+      imagenPlato: json["imagen"] ?? '',
+      imagenDispositivo: json["imagenDispositivo"] ?? '',
+      estado: json["estado"] ?? '',
+      fechaHora: json["fechaHora"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "nombre": nombre,
         "descripcion": descripcion,
-        "categoris": categorias,
-        "subCategoria1": subCategoria1,
-        "subCategoria2": subCategoria2,
+        "categoris": categoria,
+       
         "tamanio": tamanio,
         "peso": peso,
-        "imagen": imagen,
+        "precio": precio,
+        
+        "imagenPlato": imagenPlato,
         "imagenDispositivo": imagenDispositivo,
         "estado": estado,
         "fechaHora": fechaHora,
+       
       };
 }

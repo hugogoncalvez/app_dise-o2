@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SubTipoHsPrecioAnimado extends StatefulWidget {
-  final String precioMin;
+  final String compraMin;
   final String origen1;
   final String origen2;
   final String hsInicio;
@@ -9,7 +9,7 @@ class SubTipoHsPrecioAnimado extends StatefulWidget {
 
   const SubTipoHsPrecioAnimado(
       {Key? key,
-      required this.precioMin,
+      required this.compraMin,
       required this.origen1,
       required this.origen2,
       required this.hsInicio,
@@ -26,18 +26,17 @@ class _SubTipoHsPrecioAnimadoState extends State<SubTipoHsPrecioAnimado>
 
   late Animation<double> opacidad;
 
-  late Animation<double> moverIzquierda;
+  
 
   @override
   void initState() {
     controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
+        vsync: this, duration: Duration(milliseconds: 1200));
 
     opacidad = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: controller, curve: Interval(0.1, 1, curve: Curves.easeInOut)));
 
-    moverIzquierda = Tween(begin: 100.0, end: 0.0).animate(CurvedAnimation(
-        parent: controller, curve: Interval(0.1, 1, curve: Curves.easeInOut)));
+   
 
     super.initState();
   }
@@ -60,20 +59,18 @@ class _SubTipoHsPrecioAnimadoState extends State<SubTipoHsPrecioAnimado>
           hsInicio: widget.hsInicio,
           origen1: widget.origen1,
           origen2: widget.origen2,
-          precioMin: widget.precioMin),
-      builder: (BuildContext context, Widget? childRectangulo) {
+          compraMin: widget.compraMin),
+      builder: (BuildContext context, Widget? child) {
         return Opacity(
             opacity: opacidad.value,
-            child: Transform.translate(
-                offset: Offset(moverIzquierda.value, 0),
-                child: childRectangulo));
+            child: child);
       },
     );
   }
 }
 
 class _SubTipoHsPrecio extends StatelessWidget {
-  final String precioMin;
+  final String compraMin;
   final String origen1;
   final String origen2;
   final String hsInicio;
@@ -81,7 +78,7 @@ class _SubTipoHsPrecio extends StatelessWidget {
 
   const _SubTipoHsPrecio(
       {Key? key,
-      required this.precioMin,
+      required this.compraMin,
       required this.origen1,
       required this.origen2,
       required this.hsInicio,
@@ -114,7 +111,7 @@ class _SubTipoHsPrecio extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Row(children: [
-                  Text('Min sum - \$$precioMin'),
+                  Text('Min sum - \$$compraMin'),
                 ]))
           ])
         ]));

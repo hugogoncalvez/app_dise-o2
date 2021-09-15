@@ -1,7 +1,12 @@
-import 'package:app_diseno2/animation/itemCategoria_animado.dart';
+import 'package:app_diseno2/animation/categoriaItem_animado.dart';
+import 'package:app_diseno2/bloc/platos_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TabControllerAnimado extends StatefulWidget {
+  final String categoria;
+
+  const TabControllerAnimado({required this.categoria});
   @override
   _TabControllerAnimadoState createState() => _TabControllerAnimadoState();
 }
@@ -18,7 +23,7 @@ class _TabControllerAnimadoState extends State<TabControllerAnimado>
   @override
   void initState() {
     controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
+        vsync: this, duration: Duration(milliseconds: 1150));
 
     opacidad = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: controller, curve: Interval(0.2, 1, curve: Curves.easeInOut)));
@@ -42,22 +47,24 @@ class _TabControllerAnimadoState extends State<TabControllerAnimado>
 
     return AnimatedBuilder(
       animation: controller,
-      child: _TabController(),
-      builder: (BuildContext context, Widget? childRectangulo) {
+      child: _TabController(
+        categoria: widget.categoria,
+      ),
+      builder: (BuildContext context, Widget? child) {
         return Opacity(
             opacity: opacidad.value,
             child: Transform.translate(
                 offset: Offset(moverIzquierda.value, 0),
-                child: childRectangulo));
+                child: child));
       },
     );
   }
 }
 
 class _TabController extends StatefulWidget {
-  const _TabController({
-    Key? key,
-  }) : super(key: key);
+  final String categoria;
+
+  const _TabController({required this.categoria});
 
   @override
   _TabControllerState createState() => _TabControllerState();
@@ -71,6 +78,11 @@ class _TabControllerState extends State<_TabController> {
   FontWeight weight3 = FontWeight.normal;
   @override
   Widget build(BuildContext context) {
+    final platosBloc = BlocProvider.of<PlatosBloc>(context);
+    // platosBloc.add(OnObtienPlatos());
+    platosBloc.add(OnPlatosPorCategoriaSeleccionada(widget.categoria));
+
+    //
     final size = MediaQuery.of(context).size;
     final stiloTabBar =
         TextStyle(color: Colors.black, fontSize: size.height * 0.020);
@@ -139,33 +151,29 @@ class _TabControllerState extends State<_TabController> {
 
 class ItemsCategoriaSelecionada extends StatelessWidget {
   final ScrollController viewController = new ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    final List<String> ingredientes = [
-      'Orenges',
-      'Pecan',
-      'Maple Syrup',
-      'Mascarpone'
-    ];
-    final String item = 'Pancakes';
-    final String peso = ' 250 g';
-    final String precio = '12,50';
-    final String tamanio = 'S';
+//
 
-    return ListView.builder(
-        scrollDirection: Axis.vertical,
-        physics: BouncingScrollPhysics(),
-        controller: viewController,
-        itemCount: 3,
-        itemBuilder: (_, index) {
-          return ItemCategoriaAnimado(
-            ingredientes: ingredientes,
-            item: item,
-            peso: peso,
-            precio: precio,
-            tamanio: tamanio,
-            imagen: 'assets/comida_${index + 1}.jpg',
-          );
-        });
+    return BlocBuilder<PlatosBloc, PlatosState>(
+      builder: (_, state) {
+        return ListView.builder(
+            scrollDirection: Axis.vertical,
+            physics: BouncingScrollPhysics(),
+            controller: viewController,
+            itemCount: state.lstPlatosSCategorias.length,
+            itemBuilder: (_, index) {
+              return ItemCategoriaAnimado(
+                ingredientes: state.lstPlatosSCategorias[index].descripcion!,
+                nombre: state.lstPlatosSCategorias[index].nombre!,
+                peso: state.lstPlatosSCategorias[index].peso!,
+                precio: state.lstPlatosSCategorias[index].precio!,
+                tamanio: state.lstPlatosSCategorias[index].tamanio!,
+                imagen: state.lstPlatosSCategorias[index].imagenPlato!,
+              );
+            });
+      },
+    );
   }
 }

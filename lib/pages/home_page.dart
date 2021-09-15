@@ -1,5 +1,7 @@
-import 'package:app_diseno2/widget/selectorCategoria.dart';
 import 'package:flutter/material.dart';
+import 'package:app_diseno2/bloc/platos_bloc.dart';
+import 'package:app_diseno2/widget/selectorCategoria.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   final List<String> listaUbicacion = [
@@ -8,21 +10,24 @@ class HomePage extends StatelessWidget {
     'Location2'
   ];
   final String dropDownValue = 'Current location';
-  late String categoria;
+  String categoria = '';
   final ScrollController viewController = new ScrollController();
   @override
   Widget build(BuildContext context) {
     final Color color = Color(0xffF5F5F8);
     final size = MediaQuery.of(context).size;
     final Map<String, IconData> categoriaSelector = {
-                  "Todas": Icons.restaurant_menu,
-                  "Pizzas": Icons.local_pizza,
-                  "Haburguesas": Icons.lunch_dining,
-                  "China": Icons.ramen_dining,
-                  "Postres": Icons.icecream,
-                  "Cafes": Icons.coffee,
-                  "Otros": Icons.more_horiz
-                };
+      "Todas": Icons.restaurant_menu,
+      "Pizzas": Icons.local_pizza,
+      "Haburguesas": Icons.lunch_dining,
+      "China": Icons.ramen_dining,
+      "Postres": Icons.icecream,
+      "Cafes": Icons.coffee,
+      "Otros": Icons.more_horiz
+    };
+    final platosBloc = BlocProvider.of<PlatosBloc>(context);
+    platosBloc.add(OnObtienCategorias());
+    platosBloc.add(OnObtienPlatos());
 
     return Scaffold(
         drawer: Drawer(elevation: 0),
@@ -81,21 +86,27 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Expanded(
-              child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  controller: viewController,
-                  itemCount: 3,
-                  itemBuilder: (_, index) {
-                    return ItemMenu(
-                      categoria: 'Sweety bar',
-                      hsFin: '22:00',
-                      hsInicio: '10.00',
-                      imagen: 'assets/comida_${index + 1}.jpg',
-                      origen1: 'American',
-                      origen2: 'Italian',
-                      precioMin: '20',
-                    );
-                  }),
+              child: BlocBuilder<PlatosBloc, PlatosState>(
+                builder: (_, state) {
+                  return ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      controller: viewController,
+                      itemCount: state.lstCategorias.length,
+                      itemBuilder: (_, index) {
+                        return ItemMenu(
+                          categoria: state.lstCategorias[index].categoria!,
+                          hsFin: state.lstCategorias[index].horaFin!,
+                          hsInicio: state.lstCategorias[index].horaInicio!,
+                          imagen: state.lstCategorias[index].imagenCategoria!,
+                          origen1: state.lstCategorias[index].paisOrigen1!,
+                          origen2: state.lstCategorias[index].paisOrigen2!,
+                          precioMin: state.lstCategorias[index].compraMin!,
+                          platosBloc: platosBloc,
+                          id: state.lstCategorias[index].id!,
+                        );
+                      });
+                },
+              ),
             )
           ]),
         ));
@@ -111,7 +122,9 @@ class ItemMenu extends StatelessWidget {
       required this.origen1,
       required this.origen2,
       required this.hsInicio,
-      required this.hsFin})
+      required this.hsFin,
+      required this.platosBloc,
+      required this.id})
       : super(key: key);
 
   final String imagen;
@@ -121,6 +134,8 @@ class ItemMenu extends StatelessWidget {
   final String origen2;
   final String hsInicio;
   final String hsFin;
+  final PlatosBloc platosBloc;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +150,9 @@ class ItemMenu extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, 'categoria', arguments: imagen);
+                print(id);
+                platosBloc.add(OnEstableceCategoriaSeleccionada(id));
+                Navigator.pushNamed(context, 'categoria');
               },
               child: Hero(
                 tag: imagen,
@@ -274,7 +291,7 @@ class _AppBar extends StatelessWidget {
               width: size.height * 0.055,
               decoration: BoxDecoration(
                   shape: BoxShape.circle, color: Color(0xffF7F7FA))),
-          SizedBox(width: 2),
+          SizedBox(width: 1),
           Container(
             width: size.height * 0.055,
             decoration:
@@ -286,7 +303,7 @@ class _AppBar extends StatelessWidget {
                       color: Colors.black, size: size.height * 0.0384)),
               Positioned(
                   top: 2,
-                  right: -5,
+                  right: 0,
                   child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,

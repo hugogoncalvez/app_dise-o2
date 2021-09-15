@@ -18,12 +18,12 @@ class _CuadradoAnimadoState extends State<CategoriaAnimado>
   @override
   void initState() {
     controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
+        vsync: this, duration: Duration(milliseconds: 1150));
 
     opacidad = Tween(begin: 0.0, end: 1.0)
         .animate(CurvedAnimation(parent: controller, curve: Curves.easeInOut));
 
-        super.initState();
+    super.initState();
   }
 
   @override
@@ -42,10 +42,10 @@ class _CuadradoAnimadoState extends State<CategoriaAnimado>
       child: _Categoria(
         categoria: widget.categoria,
       ),
-      builder: (BuildContext context, Widget? childCategoria) {
+      builder: (BuildContext context, Widget? child) {
         return Opacity(
           opacity: opacidad.value,
-          child: childCategoria,
+          child: child,
         );
       },
     );

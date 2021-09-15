@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ItemCategoriaAnimado extends StatefulWidget {
-  final String item;
+  final String nombre;
   final String tamanio;
-  final List<String> ingredientes;
+  final String ingredientes;
   final String precio;
   final String peso;
   final String imagen;
 
   const ItemCategoriaAnimado(
       {Key? key,
-      required this.item,
+      required this.nombre,
       required this.tamanio,
       required this.ingredientes,
       required this.precio,
@@ -31,10 +31,10 @@ class _ItemCategoriaAnimadoState extends State<ItemCategoriaAnimado>
   @override
   void initState() {
     controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
+        vsync: this, duration: Duration(milliseconds: 1200));
 
     opacidad = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: controller, curve: Interval(0.4, 1, curve: Curves.easeInOut)));
+        parent: controller, curve: Interval(0.3, 1, curve: Curves.easeInOut)));
 
     achicar = Tween(begin: 2.0, end: 1.0)
         .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
@@ -58,32 +58,32 @@ class _ItemCategoriaAnimadoState extends State<ItemCategoriaAnimado>
       child: ItemCategoria(
         imagen: widget.imagen,
         ingredientes: widget.ingredientes,
-        item: widget.item,
+        nombre: widget.nombre,
         peso: widget.peso,
         precio: widget.precio,
         tamanio: widget.tamanio,
       ),
-      builder: (BuildContext context, Widget? childRectangulo) {
+      builder: (BuildContext context, Widget? child) {
         return Opacity(
             opacity: opacidad.value,
             child:
-                Transform.scale(scale: achicar.value, child: childRectangulo));
+                Transform.scale(scale: achicar.value, child: child));
       },
     );
   }
 }
 
 class ItemCategoria extends StatelessWidget {
-  final String item;
+  final String nombre;
   final String tamanio;
-  final List<String> ingredientes;
+  final String ingredientes;
   final String precio;
   final String peso;
   final String imagen;
 
   const ItemCategoria(
       {Key? key,
-      required this.item,
+      required this.nombre,
       required this.tamanio,
       required this.ingredientes,
       required this.precio,
@@ -127,13 +127,13 @@ class ItemCategoria extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$item - $tamanio',
+                  '$nombre - $tamanio',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 Container(
                   width: 150,
                   child: Text(
-                    '${ingredientes.join(' ')}',
+                    '$ingredientes',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(fontSize: size.height * 0.015),

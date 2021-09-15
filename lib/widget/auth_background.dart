@@ -27,8 +27,11 @@ class AuthBackground extends StatelessWidget {
             painter: RPSCustomPainter2(),
           ),
           Positioned(
-            top: -size.height * 0.06,
-            right: -size.height * 0.10,
+            top: (size.width <= 410)
+                ? -size.height * 0.11
+                : -size.height * 0.08, //-size.height * 0.06,
+            right:
+                (size.width <= 410) ? -size.height * 0.11 : -size.height * 0.09,
             child: Image(
               image: AssetImage('assets/plato.png'),
               // fit: BoxFit.fitHeight,
