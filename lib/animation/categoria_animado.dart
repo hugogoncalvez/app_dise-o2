@@ -62,21 +62,23 @@ class _Categoria extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18),
+      padding: EdgeInsets.symmetric(horizontal: size.height * 0.03),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             '$categoria',
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: size.height * 0.05, fontWeight: FontWeight.bold),
           ),
           IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.more_vert,
-                size: 33,
+                size: size.height * 0.05,
               ))
         ],
       ),

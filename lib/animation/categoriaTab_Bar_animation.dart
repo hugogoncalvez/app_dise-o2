@@ -54,8 +54,7 @@ class _TabControllerAnimadoState extends State<TabControllerAnimado>
         return Opacity(
             opacity: opacidad.value,
             child: Transform.translate(
-                offset: Offset(moverIzquierda.value, 0),
-                child: child));
+                offset: Offset(moverIzquierda.value, 0), child: child));
       },
     );
   }
@@ -135,7 +134,7 @@ class _TabControllerState extends State<_TabController> {
         ),
         Container(
           width: double.infinity,
-          height: size.height * 0.50,
+          height: (size.height < 550) ? size.height * 0.50 : size.height * 0.55,
           child: TabBarView(
             children: [
               ItemsCategoriaSelecionada(),

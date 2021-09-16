@@ -32,9 +32,13 @@ class AuthBackground extends StatelessWidget {
                 : -size.height * 0.08, //-size.height * 0.06,
             right:
                 (size.width <= 410) ? -size.height * 0.11 : -size.height * 0.09,
-            child: Image(
-              image: AssetImage('assets/plato.png'),
-              // fit: BoxFit.fitHeight,
+            child: Container(
+              width: size.height * 0.35,
+              height: size.height * 0.35,
+              child: Image(
+                image: AssetImage('assets/plato.png'),
+                // fit: BoxFit.fitHeight,
+              ),
             ),
           ),
           Positioned(

@@ -15,7 +15,6 @@ class CotegoriaPage extends StatelessWidget {
       initialIndex: 0,
       child: BlocBuilder<PlatosBloc, PlatosState>(
         builder: (_, state) {
-          
           return Scaffold(
               body: Stack(children: [
             _HeroImagen(
@@ -70,7 +69,7 @@ class _BodyContainer extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25), color: Colors.white),
         width: size.width,
-        height: size.height * 0.72,
+        height: size.height * 0.78,
         child: Column(
           children: [
             CategoriaAnimado(categoria: categoria),
@@ -138,11 +137,12 @@ class _AppBar extends StatelessWidget {
           },
           icon: Icon(
             Icons.keyboard_arrow_left_rounded,
-            size: 55,
+            size: size.height * 0.075,
           )),
       actions: [
         Container(
             child: IconButton(
+                padding: EdgeInsets.zero,
                 onPressed: () {},
                 icon: Icon(Icons.search,
                     color: Colors.black, size: size.height * 0.0384)),
@@ -156,6 +156,7 @@ class _AppBar extends StatelessWidget {
               BoxDecoration(shape: BoxShape.circle, color: Color(0xffF7F7FA)),
           child: Stack(alignment: Alignment.center, children: [
             IconButton(
+                padding: EdgeInsets.zero,
                 onPressed: () {},
                 icon: Icon(Icons.tune,
                     color: Colors.black, size: size.height * 0.0384)),

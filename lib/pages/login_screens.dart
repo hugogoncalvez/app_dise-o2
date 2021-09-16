@@ -28,14 +28,14 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: size.height * 0.07),
+              SizedBox(height: size.height * 0.06),
               TextButton(
                 onPressed: () =>
                     Navigator.pushReplacementNamed(context, 'register'),
                 child: Text(
                   'Crear una nueva Cuenta',
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: size.height * 0.025,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
@@ -65,6 +65,7 @@ class _Formulario extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Form(
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -72,7 +73,7 @@ class _Formulario extends StatelessWidget {
           children: [
             TextformCorreo(),
             TextformPass(),
-            SizedBox(height: 40),
+            SizedBox(height: size.height * 0.05),
             MaterialButton(
               minWidth: 300,
               onPressed: () {
@@ -85,9 +86,10 @@ class _Formulario extends StatelessWidget {
               child: Container(
                 child: Text(
                   'Ingresar',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(
+                      color: Colors.white, fontSize: size.height * 0.03),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.02),
               ),
             )
           ],

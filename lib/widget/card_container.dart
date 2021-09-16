@@ -7,12 +7,18 @@ class CardContainer extends StatelessWidget {
   const CardContainer({Key? key, required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(15),
         width: double.infinity,
-        height: 330,
+        height: (size.height < 535)
+            ? size.height * 0.57
+            : (size.height < 800)
+                ? size.height * 0.48
+                : size.height * 0.4,
         decoration: _createCard(),
         child: this.child,
       ),

@@ -31,11 +31,16 @@ class SplashPage extends StatelessWidget {
               Positioned(
                 top: (width <= 410) ? -height * 0.11 : -height * 0.08,
                 right: (width <= 410) ? -height * 0.11 : -height * 0.09,
-                child: Imagen(
-                  imagen: 'assets/plato.png',
-                  spreadRadius: 5,
-                  blurRadius: 5,
-                  opacidad: 0.2,
+                child: Container(
+                  width: (size.height < 535)
+                      ? size.height * 0.35
+                      : size.height * 0.31,
+                  child: Imagen(
+                    imagen: 'assets/plato.png',
+                    spreadRadius: 5,
+                    blurRadius: 5,
+                    opacidad: 0.2,
+                  ),
                 ),
               ),
               Positioned(
@@ -96,37 +101,40 @@ class SplashPage extends StatelessWidget {
 }
 
 class _FloatingActionButton extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
-    //  final size = MediaQuery.of(context).size;
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       final width = constraints.biggest.width;
       final height = constraints.biggest.height;
 
       return FloatingActionButton(
-        child: Container(
-          child: Stack(
-            alignment: Alignment.centerLeft,
-            children: [
-              Positioned(
-                left: (width <= 410) ? height * 0.01 : height * 0.010,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              left: (width <= 410)
+                  ? (width <= 320)
+                      ? height * 0.015
+                      : height * 0.005
+                  : height * 0.010,
+              child: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white30,
+                size: (height < 820) ? height * 0.055 : height * 0.042,
+              ),
+            ),
+            Positioned(
+                left: (width <= 410)
+                    ? (width <= 320)
+                        ? height * 0.035
+                        : height * 0.02
+                    : height * 0.023,
                 child: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.white30,
-                  size: 30,
-                ),
-              ),
-              Positioned(
-                  left: (width <= 410) ? height * 0.025 : height * 0.023,
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 30,
-                  ))
-            ],
-          ),
+                  size: (height < 820) ? height * 0.055 : height * 0.042,
+                ))
+          ],
         ),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),

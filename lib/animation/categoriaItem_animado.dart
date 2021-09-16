@@ -66,8 +66,7 @@ class _ItemCategoriaAnimadoState extends State<ItemCategoriaAnimado>
       builder: (BuildContext context, Widget? child) {
         return Opacity(
             opacity: opacidad.value,
-            child:
-                Transform.scale(scale: achicar.value, child: child));
+            child: Transform.scale(scale: achicar.value, child: child));
       },
     );
   }
@@ -93,9 +92,10 @@ class ItemCategoria extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
+      padding: EdgeInsets.only(
+          bottom: 5, left: size.height * 0.01, right: size.height * 0.010),
       child: Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
@@ -105,13 +105,13 @@ class ItemCategoria extends StatelessWidget {
               )
         ], borderRadius: BorderRadius.circular(15), color: Colors.white),
         width: double.infinity,
-        height: 120,
+        height: size.height * 0.18,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
-              width: 120,
-              height: 110,
+              width: size.height * 0.12,
+              height: size.height * 0.13,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image(
@@ -122,52 +122,60 @@ class ItemCategoria extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '$nombre - $tamanio',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  width: 150,
-                  child: Text(
-                    '$ingredientes',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: TextStyle(fontSize: size.height * 0.015),
+            Padding(
+              padding: EdgeInsets.only(left: size.height * 0.001),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$nombre - $tamanio',
+                    style: TextStyle(
+                        fontSize: size.height * 0.03,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-                Text(
-                  '\$ $precio',
-                  style: TextStyle(
-                      color: Color(0xff3654D0),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900),
-                )
-              ],
+                  Container(
+                    width: size.height * 0.25,
+                    child: Text(
+                      '$ingredientes',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(fontSize: size.height * 0.015),
+                    ),
+                  ),
+                  Text(
+                    '\$ $precio',
+                    style: TextStyle(
+                        color: Color(0xff3654D0),
+                        fontSize: size.height * 0.03,
+                        fontWeight: FontWeight.w900),
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02,
+                  horizontal: size.height * 0.015),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('$peso'),
                   Container(
-                    width: 45,
-                    height: 45,
+                    width: size.height * 0.04,
+                    height: size.height * 0.04,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Color(0xff3654d0)),
                     child: IconButton(
+                        padding: EdgeInsets.zero,
                         onPressed: () {
                           Navigator.pushNamed(context, 'carrito');
                         },
                         icon: Icon(
                           Icons.add,
                           color: Colors.white,
-                          size: 28,
+                          size: size.height * 0.04,
                         )),
                   )
                 ],

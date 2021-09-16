@@ -32,7 +32,8 @@ class CarritoPage extends StatelessWidget {
           centerTitle: true,
           title: Text(
             'Cart',
-            style: TextStyle(color: Colors.black, fontSize: 18),
+            style:
+                TextStyle(color: Colors.black, fontSize: size.height * 0.025),
           ),
         ),
         body: Container(
@@ -41,7 +42,7 @@ class CarritoPage extends StatelessWidget {
           child: Column(
             children: [
               _Cabecera(size: size),
-              SizedBox(height: 20),
+              SizedBox(height: size.height * 0.02),
               Container(
                 width: double.infinity,
                 height: size.height * 0.3,
@@ -84,7 +85,7 @@ class _Cabecera extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: size.height * 0.01),
       child: Container(
         width: double.infinity,
         height: (size.width <= 410) ? size.height * 0.20 : size.height * 0.18,

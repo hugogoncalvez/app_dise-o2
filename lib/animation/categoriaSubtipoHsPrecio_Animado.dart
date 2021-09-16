@@ -26,8 +26,6 @@ class _SubTipoHsPrecioAnimadoState extends State<SubTipoHsPrecioAnimado>
 
   late Animation<double> opacidad;
 
-  
-
   @override
   void initState() {
     controller = new AnimationController(
@@ -35,8 +33,6 @@ class _SubTipoHsPrecioAnimadoState extends State<SubTipoHsPrecioAnimado>
 
     opacidad = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: controller, curve: Interval(0.1, 1, curve: Curves.easeInOut)));
-
-   
 
     super.initState();
   }
@@ -61,9 +57,7 @@ class _SubTipoHsPrecioAnimadoState extends State<SubTipoHsPrecioAnimado>
           origen2: widget.origen2,
           compraMin: widget.compraMin),
       builder: (BuildContext context, Widget? child) {
-        return Opacity(
-            opacity: opacidad.value,
-            child: child);
+        return Opacity(opacity: opacidad.value, child: child);
       },
     );
   }
@@ -87,12 +81,14 @@ class _SubTipoHsPrecio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 18),
+        margin: EdgeInsets.symmetric(horizontal: size.height * 0.035),
         width: double.infinity,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-            padding: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
+            padding: EdgeInsets.only(
+                left: size.height * 0.03, top: size.height * 0.01, bottom: 10),
             child: Text('$origen1     $origen2'),
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -100,18 +96,22 @@ class _SubTipoHsPrecio extends StatelessWidget {
               children: [
                 Icon(
                   Icons.watch_later,
-                  size: 17,
+                  size: size.height * 0.03,
                 ),
                 SizedBox(
                   width: 3,
                 ),
-                Text('$hsInicio - $hsFin'),
+                Text(
+                  '$hsInicio - $hsFin',
+                  style: TextStyle(fontSize: size.height * 0.02),
+                ),
               ],
             ),
             Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Row(children: [
-                  Text('Min sum - \$$compraMin'),
+                  Text('Min sum - \$$compraMin',
+                      style: TextStyle(fontSize: size.height * 0.02))
                 ]))
           ])
         ]));

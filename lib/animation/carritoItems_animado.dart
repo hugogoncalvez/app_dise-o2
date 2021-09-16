@@ -83,25 +83,23 @@ class _ItemComprado extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black12.withOpacity(0.05),
-                  blurRadius: 15,
-                  offset: Offset(5, 4))
-            ]),
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.circular(15), boxShadow: [
+          BoxShadow(
+              color: Colors.black12.withOpacity(0.05),
+              blurRadius: 15,
+              offset: Offset(5, 4))
+        ]),
         width: double.infinity,
         height: (conAdicional)
             ? (size.width <= 410)
-                ? size.height * 0.18
-                : size.height * 0.155
+                ? size.height * 0.21
+                : size.height * 0.18
             : (size.width <= 410)
-                ? size.height * 0.065
-                : size.height * 0.06,
+                ? size.height * 0.085
+                : size.height * 0.07,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -154,7 +152,7 @@ class _ItemComprado extends StatelessWidget {
               ),
               if (conAdicional)
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(top: 5),
                   child: DottedLine(
                       direction: Axis.horizontal,
                       lineLength: double.infinity,
