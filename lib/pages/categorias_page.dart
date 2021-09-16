@@ -2,6 +2,7 @@ import 'package:app_diseno2/animation/categoria_animado.dart';
 import 'package:app_diseno2/animation/categoriaSubtipoHsPrecio_Animado.dart';
 import 'package:app_diseno2/animation/categoriaTab_Bar_animation.dart';
 import 'package:app_diseno2/bloc/platos_bloc.dart';
+import 'package:app_diseno2/widget/icono_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +24,8 @@ class CotegoriaPage extends StatelessWidget {
             _AppBar(
               size: size,
             ),
+
+            ///TODO queda mas legible si solo se le pasa el objeto e internamente se descompone
             _BodyContainer(
               size: size,
               hsFin: state.categoriaSeleccionada.horaFin!,
@@ -140,28 +143,10 @@ class _AppBar extends StatelessWidget {
             size: size.height * 0.075,
           )),
       actions: [
-        Container(
-            child: IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                icon: Icon(Icons.search,
-                    color: Colors.black, size: size.height * 0.0384)),
-            width: size.height * 0.055,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle, color: Color(0xffF7F7FA))),
+        ///TODO Como la mayor parte del widget es identico se puede crear uno independiente y vuelve mas legible el codigo
+        BotonAppBar(icono: Icons.search),
         SizedBox(width: 2),
-        Container(
-          width: size.height * 0.055,
-          decoration:
-              BoxDecoration(shape: BoxShape.circle, color: Color(0xffF7F7FA)),
-          child: Stack(alignment: Alignment.center, children: [
-            IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                icon: Icon(Icons.tune,
-                    color: Colors.black, size: size.height * 0.0384)),
-          ]),
-        ),
+        BotonAppBar(icono: Icons.tune),
         SizedBox(
           width: 15,
         )

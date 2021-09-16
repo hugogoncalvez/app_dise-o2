@@ -1,3 +1,4 @@
+import 'package:app_diseno2/widget/icono_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:app_diseno2/bloc/platos_bloc.dart';
 import 'package:app_diseno2/widget/selectorCategoria.dart';
@@ -29,12 +30,14 @@ class HomePage extends StatelessWidget {
     platosBloc.add(OnObtienCategorias());
     platosBloc.add(OnObtienPlatos());
 
+    ///TODO se puede separar en widget para que sea mas legible el widget principal
     return Scaffold(
         drawer: Drawer(elevation: 0),
         body: SafeArea(
           child: CustomScrollView(
             physics: BouncingScrollPhysics(),
             slivers: [
+              ///TODO ver si se puede hacer scrol de la parte superior del sliver cuando se haga scroll de la lsita de items
               _SliverAppBar(
                   size: size,
                   color: color,
@@ -100,6 +103,7 @@ class HomePage extends StatelessWidget {
                                   controller: viewController,
                                   itemCount: state.lstCategorias.length,
                                   itemBuilder: (_, index) {
+                                    ///TODO Se puede pasar pasar un objeto de tipo CategoriaModel y realizar la desestrucuracion internamente para que sea mas legible el widget
                                     return ItemMenu(
                                       categoria:
                                           state.lstCategorias[index].categoria!,
@@ -154,15 +158,7 @@ class _SliverAppBar extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          Container(
-              child: IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () {},
-                  icon: Icon(Icons.search,
-                      color: Colors.black, size: size.height * 0.0384)),
-              width: size.height * 0.055,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle, color: Color(0xffF7F7FA))),
+          BotonAppBar(icono: Icons.search),
           Container(
             width: size.height * 0.055,
             decoration:
@@ -228,6 +224,8 @@ class ItemMenu extends StatelessWidget {
       required this.origen2,
       required this.hsInicio,
       required this.hsFin,
+
+      ///TODO No es necesario pasar el bloc como parametro
       required this.platosBloc,
       required this.id})
       : super(key: key);
