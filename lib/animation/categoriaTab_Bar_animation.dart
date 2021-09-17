@@ -171,7 +171,7 @@ class ItemsCategoriaSelecionada extends StatelessWidget {
             child: Container(
                 child: Text(
           'No hay items para ésta categoría',
-          style: TextStyle(fontSize: size.height * 0.035),
+          style: TextStyle(fontSize: size.height * 0.025),
         )));
       }
     });
