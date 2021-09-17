@@ -1,4 +1,5 @@
 import 'package:app_diseno2/bloc/platos_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:app_diseno2/pages/payment_page.dart';
 import 'package:app_diseno2/pages/carrito.dart';
@@ -15,9 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_)=>new PlatosBloc())
-      ],
+      providers: [BlocProvider(create: (_) => new PlatosBloc())],
       child: MaterialApp(
         title: 'Curso Diseño',
         initialRoute: 'inicio',
@@ -27,8 +26,8 @@ class MyApp extends StatelessWidget {
           'register': (_) => RegisterPage(),
           'home': (_) => HomePage(),
           'categoria': (_) => CotegoriaPage(),
-          'carrito': (_)  => CarritoPage(),
-          'pago': (_)=> PagoPage()
+          'carrito': (_) => CarritoPage(),
+          'pago': (_) => PagoPage(),
         },
         debugShowCheckedModeBanner: false,
       ),

@@ -85,6 +85,32 @@ class PlatosBloc extends Bloc<PlatosEvent, PlatosState> {
       costoDelivery: '3',
       compraMin: '20',
       imagenCategoria: 'assets/categoriaSaladosHambur.jpg');
+  final CategoriaModel categoria4 = new CategoriaModel(
+      id: '4',
+      categoria: 'Gelato bar',
+      subCategoria1: 'BreakFast',
+      subCategoria2: 'Main dishes',
+      subCategoria3: 'Desserts',
+      paisOrigen1: '',
+      paisOrigen2: 'Italian',
+      horaInicio: '10:00',
+      horaFin: '22:00',
+      costoDelivery: '3',
+      compraMin: '20',
+      imagenCategoria: 'assets/categoriaDulcesGelato.jpg');
+  final CategoriaModel categoria5 = new CategoriaModel(
+      id: '5',
+      categoria: 'Cofee bar',
+      subCategoria1: 'BreakFast',
+      subCategoria2: 'Main dishes',
+      subCategoria3: 'Desserts',
+      paisOrigen1: 'American',
+      paisOrigen2: 'Italian',
+      horaInicio: '10:00',
+      horaFin: '22:00',
+      costoDelivery: '3',
+      compraMin: '20',
+      imagenCategoria: 'assets/categoriaBebidasCafe.jpg');
   @override
   Stream<PlatosState> mapEventToState(
     PlatosEvent event,
@@ -133,6 +159,8 @@ class PlatosBloc extends Bloc<PlatosEvent, PlatosState> {
       listaCat.add(categoria1);
       listaCat.add(categoria2);
       listaCat.add(categoria3);
+      listaCat.add(categoria4);
+      listaCat.add(categoria5);
 
       yield state.copyWith(isWorking: false, lstCategorias: listaCat);
     }

@@ -25,12 +25,7 @@ class CotegoriaPage extends StatelessWidget {
             ),
             _BodyContainer(
               size: size,
-              hsFin: state.categoriaSeleccionada.horaFin!,
-              hsInicio: state.categoriaSeleccionada.horaInicio!,
-              origen1: state.categoriaSeleccionada.paisOrigen1!,
-              origen2: state.categoriaSeleccionada.paisOrigen2!,
-              compraMin: state.categoriaSeleccionada.compraMin!,
-              categoria: state.categoriaSeleccionada.categoria!,
+              state: state,
             )
           ]));
         },
@@ -43,21 +38,12 @@ class _BodyContainer extends StatelessWidget {
   const _BodyContainer({
     Key? key,
     required this.size,
-    required this.categoria,
-    required this.compraMin,
-    required this.origen1,
-    required this.origen2,
-    required this.hsInicio,
-    required this.hsFin,
+    required this.state,
   }) : super(key: key);
 
   final Size size;
-  final String categoria;
-  final String compraMin;
-  final String origen1;
-  final String origen2;
-  final String hsInicio;
-  final String hsFin;
+
+  final PlatosState state;
 
   @override
   Widget build(BuildContext context) {
@@ -72,15 +58,14 @@ class _BodyContainer extends StatelessWidget {
         height: size.height * 0.78,
         child: Column(
           children: [
-            CategoriaAnimado(categoria: categoria),
+            CategoriaAnimado(
+              state: state,
+            ),
             SubTipoHsPrecioAnimado(
-                hsFin: hsFin,
-                hsInicio: hsInicio,
-                origen1: origen1,
-                origen2: origen2,
-                compraMin: compraMin),
+              state: state,
+            ),
             TabControllerAnimado(
-              categoria: categoria,
+              state: state,
             ),
           ],
         ),
@@ -131,41 +116,63 @@ class _AppBar extends StatelessWidget {
       iconTheme: IconThemeData(color: Colors.black),
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: IconButton(
+      leading: _ButtonAppBar(
+          icono: Icon(Icons.keyboard_arrow_left_rounded,
+              size: size.height * 0.075),
           onPressed: () {
             Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: size.height * 0.075,
-          )),
+          }),
       actions: [
-        Container(
-            child: IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                icon: Icon(Icons.search,
-                    color: Colors.black, size: size.height * 0.0384)),
-            width: size.height * 0.055,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle, color: Color(0xffF7F7FA))),
+        _Actions(
+          size: size,
+          icono: Icons.search,
+        ),
         SizedBox(width: 2),
-        Container(
-          width: size.height * 0.055,
-          decoration:
-              BoxDecoration(shape: BoxShape.circle, color: Color(0xffF7F7FA)),
-          child: Stack(alignment: Alignment.center, children: [
-            IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                icon: Icon(Icons.tune,
-                    color: Colors.black, size: size.height * 0.0384)),
-          ]),
+        _Actions(
+          size: size,
+          icono: Icons.tune,
         ),
         SizedBox(
           width: 15,
         )
       ],
     );
+  }
+}
+
+class _Actions extends StatelessWidget {
+  const _Actions({
+    Key? key,
+    required this.size,
+    required this.icono,
+  }) : super(key: key);
+
+  final Size size;
+  final IconData icono;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: _ButtonAppBar(
+            icono: Icon(icono, color: Colors.black, size: size.height * 0.0384),
+            onPressed: () {}),
+        decoration:
+            BoxDecoration(shape: BoxShape.circle, color: Color(0xffF7F7FA)));
+  }
+}
+
+class _ButtonAppBar extends StatelessWidget {
+  const _ButtonAppBar({
+    Key? key,
+    required this.icono,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final Icon icono;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(onPressed: onPressed, icon: icono);
   }
 }

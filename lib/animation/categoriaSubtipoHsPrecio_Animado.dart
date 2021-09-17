@@ -1,20 +1,12 @@
+import 'package:app_diseno2/bloc/platos_bloc.dart';
 import 'package:flutter/material.dart';
 
 class SubTipoHsPrecioAnimado extends StatefulWidget {
-  final String compraMin;
-  final String origen1;
-  final String origen2;
-  final String hsInicio;
-  final String hsFin;
-
-  const SubTipoHsPrecioAnimado(
-      {Key? key,
-      required this.compraMin,
-      required this.origen1,
-      required this.origen2,
-      required this.hsInicio,
-      required this.hsFin})
-      : super(key: key);
+  final PlatosState state;
+  const SubTipoHsPrecioAnimado({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
   @override
   _SubTipoHsPrecioAnimadoState createState() => _SubTipoHsPrecioAnimadoState();
 }
@@ -51,11 +43,8 @@ class _SubTipoHsPrecioAnimadoState extends State<SubTipoHsPrecioAnimado>
     return AnimatedBuilder(
       animation: controller,
       child: _SubTipoHsPrecio(
-          hsFin: widget.hsFin,
-          hsInicio: widget.hsInicio,
-          origen1: widget.origen1,
-          origen2: widget.origen2,
-          compraMin: widget.compraMin),
+        state: widget.state,
+      ),
       builder: (BuildContext context, Widget? child) {
         return Opacity(opacity: opacidad.value, child: child);
       },
@@ -64,20 +53,12 @@ class _SubTipoHsPrecioAnimadoState extends State<SubTipoHsPrecioAnimado>
 }
 
 class _SubTipoHsPrecio extends StatelessWidget {
-  final String compraMin;
-  final String origen1;
-  final String origen2;
-  final String hsInicio;
-  final String hsFin;
+  final PlatosState state;
 
-  const _SubTipoHsPrecio(
-      {Key? key,
-      required this.compraMin,
-      required this.origen1,
-      required this.origen2,
-      required this.hsInicio,
-      required this.hsFin})
-      : super(key: key);
+  const _SubTipoHsPrecio({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +70,7 @@ class _SubTipoHsPrecio extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
                 left: size.height * 0.03, top: size.height * 0.01, bottom: 10),
-            child: Text('$origen1     $origen2'),
+            child: Text('${state.categoriaSeleccionada.paisOrigen1}     ${state.categoriaSeleccionada.paisOrigen2}'),
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(
@@ -102,7 +83,7 @@ class _SubTipoHsPrecio extends StatelessWidget {
                   width: 3,
                 ),
                 Text(
-                  '$hsInicio - $hsFin',
+                  '${state.categoriaSeleccionada.horaInicio} - ${state.categoriaSeleccionada.horaFin}',
                   style: TextStyle(fontSize: size.height * 0.02),
                 ),
               ],
@@ -110,7 +91,7 @@ class _SubTipoHsPrecio extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Row(children: [
-                  Text('Min sum - \$$compraMin',
+                  Text('Min sum - \$${state.categoriaSeleccionada.compraMin}',
                       style: TextStyle(fontSize: size.height * 0.02))
                 ]))
           ])

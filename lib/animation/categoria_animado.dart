@@ -1,9 +1,10 @@
+import 'package:app_diseno2/bloc/platos_bloc.dart';
 import 'package:flutter/material.dart';
 
 class CategoriaAnimado extends StatefulWidget {
-  final String categoria;
+  final PlatosState state;
 
-  const CategoriaAnimado({Key? key, required this.categoria}) : super(key: key);
+  const CategoriaAnimado({Key? key, required this.state}) : super(key: key);
   @override
   _CuadradoAnimadoState createState() => _CuadradoAnimadoState();
 }
@@ -39,9 +40,7 @@ class _CuadradoAnimadoState extends State<CategoriaAnimado>
 
     return AnimatedBuilder(
       animation: controller,
-      child: _Categoria(
-        categoria: widget.categoria,
-      ),
+      child: _Categoria(state: widget.state,),
       builder: (BuildContext context, Widget? child) {
         return Opacity(
           opacity: opacidad.value,
@@ -55,10 +54,10 @@ class _CuadradoAnimadoState extends State<CategoriaAnimado>
 class _Categoria extends StatelessWidget {
   const _Categoria({
     Key? key,
-    required this.categoria,
+    required this.state,
   }) : super(key: key);
 
-  final String categoria;
+  final PlatosState state;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +68,7 @@ class _Categoria extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '$categoria',
+            '${state.categoriaSeleccionada.categoria}',
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 fontSize: size.height * 0.05, fontWeight: FontWeight.bold),

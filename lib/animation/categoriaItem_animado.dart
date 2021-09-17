@@ -1,22 +1,11 @@
+import 'package:app_diseno2/bloc/platos_bloc.dart';
 import 'package:flutter/material.dart';
 
 class ItemCategoriaAnimado extends StatefulWidget {
-  final String nombre;
-  final String tamanio;
-  final String ingredientes;
-  final String precio;
-  final String peso;
-  final String imagen;
+  final PlatosState state;
+  final int index;
 
-  const ItemCategoriaAnimado(
-      {Key? key,
-      required this.nombre,
-      required this.tamanio,
-      required this.ingredientes,
-      required this.precio,
-      required this.peso,
-      required this.imagen})
-      : super(key: key);
+  const ItemCategoriaAnimado(this.state, this.index);
   @override
   _ItemCategoriaAnimadoState createState() => _ItemCategoriaAnimadoState();
 }
@@ -55,14 +44,7 @@ class _ItemCategoriaAnimadoState extends State<ItemCategoriaAnimado>
 
     return AnimatedBuilder(
       animation: controller,
-      child: ItemCategoria(
-        imagen: widget.imagen,
-        ingredientes: widget.ingredientes,
-        nombre: widget.nombre,
-        peso: widget.peso,
-        precio: widget.precio,
-        tamanio: widget.tamanio,
-      ),
+      child: ItemCategoria(widget.state, widget.index),
       builder: (BuildContext context, Widget? child) {
         return Opacity(
             opacity: opacidad.value,
@@ -73,22 +55,13 @@ class _ItemCategoriaAnimadoState extends State<ItemCategoriaAnimado>
 }
 
 class ItemCategoria extends StatelessWidget {
-  final String nombre;
-  final String tamanio;
-  final String ingredientes;
-  final String precio;
-  final String peso;
-  final String imagen;
+  final PlatosState state;
+  final int index;
 
   const ItemCategoria(
-      {Key? key,
-      required this.nombre,
-      required this.tamanio,
-      required this.ingredientes,
-      required this.precio,
-      required this.peso,
-      required this.imagen})
-      : super(key: key);
+    this.state,
+    this.index,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +88,8 @@ class ItemCategoria extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image(
-                  image: AssetImage(imagen),
+                  image: AssetImage(
+                      state.lstPlatosSCategorias[index].imagenPlato!),
                   fit: BoxFit.fill,
                   width: double.infinity,
                   height: double.infinity,
@@ -129,7 +103,7 @@ class ItemCategoria extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '$nombre - $tamanio',
+                    '${state.lstPlatosSCategorias[index].nombre!} - ${state.lstPlatosSCategorias[index].tamanio!}',
                     style: TextStyle(
                         fontSize: size.height * 0.03,
                         fontWeight: FontWeight.bold),
@@ -137,14 +111,14 @@ class ItemCategoria extends StatelessWidget {
                   Container(
                     width: size.height * 0.25,
                     child: Text(
-                      '$ingredientes',
+                      '${state.lstPlatosSCategorias[index].descripcion!}',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(fontSize: size.height * 0.015),
                     ),
                   ),
                   Text(
-                    '\$ $precio',
+                    '\$ ${state.lstPlatosSCategorias[index].precio!}',
                     style: TextStyle(
                         color: Color(0xff3654D0),
                         fontSize: size.height * 0.03,
@@ -160,7 +134,7 @@ class ItemCategoria extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('$peso'),
+                  Text('${state.lstPlatosSCategorias[index].peso!}'),
                   Container(
                     width: size.height * 0.04,
                     height: size.height * 0.04,

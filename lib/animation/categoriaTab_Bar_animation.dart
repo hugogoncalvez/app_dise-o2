@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TabControllerAnimado extends StatefulWidget {
-  final String categoria;
+  final PlatosState state;
 
-  const TabControllerAnimado({required this.categoria});
+  const TabControllerAnimado({required this.state});
   @override
   _TabControllerAnimadoState createState() => _TabControllerAnimadoState();
 }
@@ -48,7 +48,7 @@ class _TabControllerAnimadoState extends State<TabControllerAnimado>
     return AnimatedBuilder(
       animation: controller,
       child: _TabController(
-        categoria: widget.categoria,
+        state: widget.state,
       ),
       builder: (BuildContext context, Widget? child) {
         return Opacity(
@@ -61,9 +61,9 @@ class _TabControllerAnimadoState extends State<TabControllerAnimado>
 }
 
 class _TabController extends StatefulWidget {
-  final String categoria;
+  final PlatosState state;
 
-  const _TabController({required this.categoria});
+  const _TabController({required this.state});
 
   @override
   _TabControllerState createState() => _TabControllerState();
@@ -79,7 +79,8 @@ class _TabControllerState extends State<_TabController> {
   Widget build(BuildContext context) {
     final platosBloc = BlocProvider.of<PlatosBloc>(context);
     // platosBloc.add(OnObtienPlatos());
-    platosBloc.add(OnPlatosPorCategoriaSeleccionada(widget.categoria));
+    platosBloc.add(OnPlatosPorCategoriaSeleccionada(
+        widget.state.categoriaSeleccionada.categoria.toString()));
 
     //
     final size = MediaQuery.of(context).size;
@@ -153,26 +154,26 @@ class ItemsCategoriaSelecionada extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//
+    final Size size = MediaQuery.of(context).size;
 
-    return BlocBuilder<PlatosBloc, PlatosState>(
-      builder: (_, state) {
+    return BlocBuilder<PlatosBloc, PlatosState>(builder: (_, state) {
+      if (state.lstPlatosSCategorias.length > 0) {
         return ListView.builder(
             scrollDirection: Axis.vertical,
             physics: BouncingScrollPhysics(),
             controller: viewController,
             itemCount: state.lstPlatosSCategorias.length,
             itemBuilder: (_, index) {
-              return ItemCategoriaAnimado(
-                ingredientes: state.lstPlatosSCategorias[index].descripcion!,
-                nombre: state.lstPlatosSCategorias[index].nombre!,
-                peso: state.lstPlatosSCategorias[index].peso!,
-                precio: state.lstPlatosSCategorias[index].precio!,
-                tamanio: state.lstPlatosSCategorias[index].tamanio!,
-                imagen: state.lstPlatosSCategorias[index].imagenPlato!,
-              );
+              return ItemCategoriaAnimado(state, index);
             });
-      },
-    );
+      } else {
+        return Center(
+            child: Container(
+                child: Text(
+          'No hay items para ésta categoría',
+          style: TextStyle(fontSize: size.height * 0.035),
+        )));
+      }
+    });
   }
 }
