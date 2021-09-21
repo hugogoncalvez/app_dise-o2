@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Circulo extends StatelessWidget {
   final double radio;
-  final Color colore;
+  final Color color;
 
-  const Circulo({required this.radio, required this.colore});
+  const Circulo({required this.radio, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,7 @@ class Circulo extends StatelessWidget {
       width: radio * 2,
       height: radio * 2,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radio),
-          color: colore
-          ),
+          borderRadius: BorderRadius.circular(radio), color: color),
     );
   }
 }

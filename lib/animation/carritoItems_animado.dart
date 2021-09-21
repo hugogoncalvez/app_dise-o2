@@ -80,126 +80,131 @@ class _ItemComprado extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(10),
+    return Container(
+      margin: EdgeInsets.symmetric(
+          horizontal: size.height * 0.01, vertical: size.height * 0.01),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(15), boxShadow: [
+        BoxShadow(
+            color: Colors.black12.withOpacity(0.05),
+            blurRadius: 15,
+            offset: Offset(5, 4))
+      ]),
+      width: size.height * 0.01,
+      height: (conAdicional) ? size.height * 0.19 : size.height * 0.086,
       child: Container(
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.circular(15), boxShadow: [
-          BoxShadow(
-              color: Colors.black12.withOpacity(0.05),
-              blurRadius: 15,
-              offset: Offset(5, 4))
-        ]),
-        width: double.infinity,
-        height: (conAdicional)
-            ? (size.width <= 410)
-                ? size.height * 0.21
-                : size.height * 0.18
-            : (size.width <= 410)
-                ? size.height * 0.085
-                : size.height * 0.07,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(children: [
-                    Text(item,
+        margin: EdgeInsets.symmetric(
+            horizontal: size.height * 0.02, vertical: size.height * 0.025),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(children: [
+                  Text(item,
+                      style: TextStyle(
+                          fontSize: size.height * 0.0225,
+                          fontWeight: FontWeight.bold))
+                ]),
+                Row(
+                  children: [
+                    Container(
+                        // alignment: Alignment.center,
+                        width: size.height * 0.0353,
+                        height: size.height * 0.0353,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xffF7F7FA)),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          color: Colors.black,
+                          splashRadius: 0.1,
+                          alignment: Alignment.center,
+                          onPressed: () {},
+                          icon: Icon(Icons.remove, size: size.height * 0.035),
+                        )),
+                    SizedBox(width: size.height * 0.014104),
+                    Text(
+                      '1',
+                      style: TextStyle(
+                          fontSize: size.height * 0.0225,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(width: size.height * 0.014104),
+                    Container(
+                        width: size.height * 0.0353,
+                        height: size.height * 0.0353,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xffF7F7FA)),
+                        child: IconButton(
+                          splashRadius: 0.1,
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(Icons.add, size: size.height * 0.035),
+                        )),
+                    SizedBox(width: size.height * 0.02115),
+                    Text(precio,
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold))
-                  ]),
+                            fontSize: size.height * 0.0225,
+                            fontWeight: FontWeight.bold))
+                  ],
+                )
+              ],
+            ),
+            if (conAdicional)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: DottedLine(
+                    direction: Axis.horizontal,
+                    lineLength: double.infinity,
+                    lineThickness: 1.0,
+                    dashLength: 4.0,
+                    dashColor: Colors.black45,
+                    dashGapLength: 4.0,
+                    dashGapColor: Colors.transparent),
+              ),
+            if (conAdicional)
+              Padding(
+                padding: EdgeInsets.only(
+                    top: size.height * 0.014104,
+                    bottom: size.height * 0.021156),
+                child: Text(
+                  'Additional Ingredients',
+                  style: TextStyle(fontSize: size.height * 0.02256),
+                ),
+              ),
+            if (conAdicional)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
                   Row(
                     children: [
                       Container(
-                          width: 25,
-                          height: 25,
+                          padding: EdgeInsets.zero,
+                          width: size.height * 0.0282,
+                          height: size.height * 0.0282,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle, color: Color(0xffF7F7FA)),
                           child: IconButton(
                               splashRadius: 0.1,
                               padding: EdgeInsets.zero,
                               onPressed: () {},
-                              icon: Icon(Icons.remove),
+                              icon: Icon(
+                                Icons.close_rounded,
+                                size: size.height * 0.025,
+                              ),
                               alignment: Alignment.center)),
-                      SizedBox(width: 10),
-                      Text(
-                        '1',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                          width: 25,
-                          height: 25,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: Color(0xffF7F7FA)),
-                          child: IconButton(
-                              splashRadius: 0.1,
-                              padding: EdgeInsets.zero,
-                              onPressed: () {},
-                              icon: Icon(Icons.add),
-                              alignment: Alignment.center)),
-                      SizedBox(width: 15),
-                      Text(precio,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold))
+                      SizedBox(width: size.height * 0.014104),
+                      Text('Jam')
                     ],
-                  )
+                  ),
+                  SizedBox(
+                    width: size.height * 0.25,
+                  ),
+                  Text('\$1,15')
                 ],
-              ),
-              if (conAdicional)
-                Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: DottedLine(
-                      direction: Axis.horizontal,
-                      lineLength: double.infinity,
-                      lineThickness: 1.0,
-                      dashLength: 4.0,
-                      dashColor: Colors.black45,
-                      dashGapLength: 4.0,
-                      dashGapColor: Colors.transparent),
-                ),
-              if (conAdicional)
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text('Additional Ingredients'),
-                ),
-              if (conAdicional)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xffF7F7FA)),
-                            child: IconButton(
-                                splashRadius: 0.1,
-                                padding: EdgeInsets.zero,
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.close_rounded,
-                                  size: 16,
-                                ),
-                                alignment: Alignment.center)),
-                        SizedBox(width: 10),
-                        Text('Jam')
-                      ],
-                    ),
-                    SizedBox(
-                      width: size.height * 0.25,
-                    ),
-                    Text('\$1,15')
-                  ],
-                )
-            ],
-          ),
+              )
+          ],
         ),
       ),
     );

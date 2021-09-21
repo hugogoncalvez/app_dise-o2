@@ -45,16 +45,20 @@ class SplashPage extends StatelessWidget {
               ),
               Positioned(
                   top: height * 0.38,
-                  right: (width <= 410) ? height * 0.11 : height * 0.11,
-                  child: Circulo(radio: 9, colore: colorCirculo)),
+                  right: (width <= 410) ? height * 0.11 : height * 0.05,
+                  child: Circulo(
+                      radio: height * 0.0126939351198872, color: colorCirculo)),
               Positioned(
                   top: height * 0.45,
                   left: -width * 0.035,
-                  child: Circulo(radio: 16, colore: colorCirculo)),
+                  child: Circulo(
+                      radio: height * 0.0225669957686883, color: colorCirculo)),
               Positioned(
                   bottom: height * 0.28,
                   right: -width * 0.015,
-                  child: Circulo(radio: 10, colore: colorCirculo2)),
+                  child: Circulo(
+                      radio: height * 0.0225669957686883,
+                      color: colorCirculo2)),
               Positioned(
                 top: height * 0.27,
                 right: width * 0.5,
@@ -164,25 +168,27 @@ class _Texto extends StatelessWidget {
             children: [
               Text('Food ',
                   style: TextStyle(
-                      fontSize: 28,
+                      fontSize: size.height * 0.03949,
                       color: Colors.white,
                       fontWeight: FontWeight.bold)),
               Text(' you love,',
-                  style: TextStyle(fontSize: 24, color: Colors.white))
+                  style: TextStyle(
+                      fontSize: size.height * 0.03385, color: Colors.white))
             ],
           ),
           Row(
             children: [
               Text('delivered ',
-                  style: TextStyle(fontSize: 24, color: Colors.white)),
+                  style: TextStyle(
+                      fontSize: size.height * 0.03385, color: Colors.white)),
               Text(' to you',
                   style: TextStyle(
-                      fontSize: 28,
+                      fontSize: size.height * 0.03949,
                       color: Colors.white,
                       fontWeight: FontWeight.bold))
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: size.height * 0.0282),
           Text(
             'Easy delegate the small tasks an devote \ntime to the most important things!',
             style: TextStyle(color: Colors.white),

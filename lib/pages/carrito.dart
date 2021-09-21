@@ -43,9 +43,7 @@ class CarritoPage extends StatelessWidget {
             children: [
               _Cabecera(size: size),
               SizedBox(height: size.height * 0.02),
-              Container(
-                width: double.infinity,
-                height: size.height * 0.3,
+              Expanded(
                 child: ListView.builder(
                   physics: BouncingScrollPhysics(),
                   controller: viewController,
@@ -67,7 +65,10 @@ class CarritoPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              CarritoTotalcuentaAnimado()
+              CarritoTotalcuentaAnimado(),
+              SizedBox(
+                height: size.height * 0.1,
+              )
             ],
           ),
         ));
@@ -154,13 +155,13 @@ class _Cabecera extends StatelessWidget {
                 right: (size.width <= 410)
                     ? size.height * 0.23
                     : size.height * 0.23,
-                child: Circulo(radio: 10, colore: Color(0xffF7FAFF))),
+                child: Circulo(radio: 10, color: Color(0xffF7FAFF))),
             Positioned(
                 top: size.height * 0.11,
                 right: (size.width <= 410)
                     ? size.height * 0.20
                     : size.height * 0.185,
-                child: Circulo(radio: 14, colore: Color(0xffD6DCF1))),
+                child: Circulo(radio: 14, color: Color(0xffD6DCF1))),
             Positioned(
               top: 5,
               right: size.height * 0.025,

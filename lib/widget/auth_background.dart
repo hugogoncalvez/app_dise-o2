@@ -44,15 +44,15 @@ class AuthBackground extends StatelessWidget {
           Positioned(
               top: size.height * 0.45,
               right: -size.height * 0.039,
-              child: Circulo(radio: 30, colore: colorCirculo)),
+              child: Circulo(radio: 30, color: colorCirculo)),
           Positioned(
               top: size.height * 0.1,
               left: size.height * 0.1,
-              child: Circulo(radio: 12, colore: colorCirculo)),
+              child: Circulo(radio: 12, color: colorCirculo)),
           Positioned(
               bottom: size.height * 0.03,
               right: size.height * 0.0124,
-              child: Circulo(radio: 9, colore: colorCirculo)),
+              child: Circulo(radio: 9, color: colorCirculo)),
           Positioned(
             bottom: size.height * 0.12,
             left: size.height * 0.005,
