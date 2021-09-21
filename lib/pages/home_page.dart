@@ -42,69 +42,76 @@ class HomePage extends StatelessWidget {
                   listaUbicacion: listaUbicacion),
             ];
           },
-          body: Container(
-            width: double.infinity,
-            color: Colors.white,
-            height: size.height,
-            padding: EdgeInsets.only(left: 10),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                  child: Text(
-                'Hello, Dilan',
-                style: TextStyle(
-                    fontSize: size.height * 0.035, fontWeight: FontWeight.bold),
-              )),
-              Container(
-                  child: Text(
-                'What do you want to eat?',
-                style: TextStyle(
-                  fontSize: size.height * 0.025,
-                ),
-              )),
-              SizedBox(height: size.height * 0.025),
-              Container(
-                height: (size.height < 535)
-                    ? size.height * 0.12
-                    : size.height * 0.09,
-                color: Color(0xffF5F5F5),
-                child: CategorySelectionWidget(
-                  categorias: categoriaSelector,
-                  onValueChanged: (newCategory) => categoria = newCategory,
-                ),
-              ),
-              SizedBox(height: size.height * 0.025),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'All categories - ',
-                    style: TextStyle(
-                        fontSize: size.height * 0.03,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'delivery \$3',
-                    style: TextStyle(fontSize: size.height * 0.02),
-                  )
-                ],
-              ),
-              Expanded(
-                child: BlocBuilder<PlatosBloc, PlatosState>(
-                  builder: (_, state) {
-                    return Scrollbar(
-                      child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          physics: BouncingScrollPhysics(),
-                          itemCount: state.lstCategorias.length,
-                          itemBuilder: (_, index) {
-                            return ItemMenu(state, index);
-                          }),
-                    );
-                  },
-                ),
-              )
-            ]),
+          body:
+              //TODO Falto el SafeAra
+              SafeArea(
+            child: Container(
+              width: double.infinity,
+              color: Colors.white,
+              height: size.height,
+              padding: EdgeInsets.only(left: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        child: Text(
+                      'Hello, Dilan',
+                      style: TextStyle(
+                          fontSize: size.height * 0.035,
+                          fontWeight: FontWeight.bold),
+                    )),
+                    Container(
+                        child: Text(
+                      'What do you want to eat?',
+                      style: TextStyle(
+                        fontSize: size.height * 0.025,
+                      ),
+                    )),
+                    SizedBox(height: size.height * 0.025),
+                    Container(
+                      height: (size.height < 535)
+                          ? size.height * 0.12
+                          : size.height * 0.09,
+                      color: Color(0xffF5F5F5),
+                      child: CategorySelectionWidget(
+                        categorias: categoriaSelector,
+                        onValueChanged: (newCategory) =>
+                            categoria = newCategory,
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.025),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'All categories - ',
+                          style: TextStyle(
+                              fontSize: size.height * 0.03,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'delivery \$3',
+                          style: TextStyle(fontSize: size.height * 0.02),
+                        )
+                      ],
+                    ),
+                    Expanded(
+                      child: BlocBuilder<PlatosBloc, PlatosState>(
+                        builder: (_, state) {
+                          return Scrollbar(
+                            child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: state.lstCategorias.length,
+                                itemBuilder: (_, index) {
+                                  return ItemMenu(state, index);
+                                }),
+                          );
+                        },
+                      ),
+                    )
+                  ]),
+            ),
           )),
     );
   }

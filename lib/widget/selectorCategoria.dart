@@ -22,25 +22,30 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.only(right: 8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-            width: 60,
-            height: 60,
+          ///TODO Una idea para animaciones utilizando AnimatedContainer probar quitar y mirar como se ve sin el widget y con el widget
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+
+            ///TODO todo debe ser porcentaje nada valores fijos
+            width: selected ? size.width * 0.135 : size.width * 0.12,
+            height: selected ? size.width * 0.135 : size.width * 0.12,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               color: selected ? Color(0xff3654D0) : Colors.white,
               border: Border.all(
                 color: selected ? Color(0xff3654D0) : Colors.white,
-                width: selected ? 4.0 : 2.0,
+                width: 4.0,
               ),
             ),
             child: Icon(
               icon,
-              size: 30.0,
+              size: selected ? size.width * 0.10 : size.width * 0.09,
               color: selected ? Colors.white : Colors.black,
             ),
           ),
